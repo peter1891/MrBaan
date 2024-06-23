@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrBaan", "MrBaan\MrBaan.csproj", "{6BCD1401-AF01-4EB4-9723-48755311634E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrBaan", "MrBaan\MrBaan.csproj", "{6BCD1401-AF01-4EB4-9723-48755311634E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrBaan.Database", "MrBaan.Database\MrBaan.Database.csproj", "{E27045A5-A912-480B-AAB0-D568D6CEBA14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrBaan.Model", "MrBaan.Model\MrBaan.Model.csproj", "{B181D194-E732-4A29-BA62-9DD01E288322}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{6BCD1401-AF01-4EB4-9723-48755311634E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BCD1401-AF01-4EB4-9723-48755311634E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BCD1401-AF01-4EB4-9723-48755311634E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E27045A5-A912-480B-AAB0-D568D6CEBA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E27045A5-A912-480B-AAB0-D568D6CEBA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E27045A5-A912-480B-AAB0-D568D6CEBA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E27045A5-A912-480B-AAB0-D568D6CEBA14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B181D194-E732-4A29-BA62-9DD01E288322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B181D194-E732-4A29-BA62-9DD01E288322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B181D194-E732-4A29-BA62-9DD01E288322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B181D194-E732-4A29-BA62-9DD01E288322}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

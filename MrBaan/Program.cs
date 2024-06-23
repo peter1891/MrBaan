@@ -1,3 +1,6 @@
+using MrBaan.Database;
+using Microsoft.EntityFrameworkCore;
+
 namespace MrBaan
 {
     public class Program
@@ -8,6 +11,10 @@ namespace MrBaan
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<DatabaseContext>(options => 
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+            database => database.MigrationsAssembly("MrBaan.Database")));
 
             var app = builder.Build();
 

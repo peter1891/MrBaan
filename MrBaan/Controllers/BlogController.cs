@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MrBaan.Database;
 using MrBaan.Models;
 using System.Diagnostics;
 
@@ -6,16 +7,26 @@ namespace MrBaan.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly DatabaseContext _context;
 
-        public BlogController(ILogger<HomeController> logger)
+        public BlogController(DatabaseContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var blogs = _context.BlogModels.ToList();
+            return View(blogs);
+        }
+
+        public IActionResult DetailsBlog(int id)
+        {
+            var blog = _context.BlogModels.FirstOrDefault(item => item.Id == id);
+            if (blog == null)
+                return NotFound();
+
+            return View(blog);
         }
 
         public IActionResult AddBlog()

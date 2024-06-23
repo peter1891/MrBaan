@@ -1,0 +1,13 @@
+﻿@model MrBaan.Models.ProjectModel
+
+@{
+    ViewData["Title"] = "Details project";
+}
+
+<div>
+    <label>@Model.Name</label>
+    <p>@Model.Created.ToShortDateString()</p>
+    <p>@Model.Description</p>
+    <a href="@Model.GitUrl">Ga naar repository</a>
+    <a asp-action="Index">Terug naar overzicht</a>
+</div>

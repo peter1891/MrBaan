@@ -1,7 +1,20 @@
-﻿@{
+﻿@model IEnumerable<MrBaan.Models.ProjectModel>
+
+@{
     ViewData["Title"] = "Projects";
 }
 
 <div class="text-center">
     <h1 class="display-4">Projects</h1>
+    <a asp-action="AddProject">Add a new project</a>
 </div>
+
+@foreach (var project in Model)
+{
+    <div>
+        <label>@project.Name</label>
+        <p>@project.Created.ToShortDateString()</p>
+        <p>@project.Description</p>
+        <a asp-action="DetailsProject" asp-route-id="@project.Id">Lees meer</a>
+    </div>
+}

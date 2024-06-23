@@ -1,7 +1,20 @@
-﻿@{
+﻿@model IEnumerable<MrBaan.Models.BlogModel>
+
+@{
     ViewData["Title"] = "Blog";
 }
 
 <div class="text-center">
     <h1 class="display-4">Blog</h1>
+    <a asp-action="AddBlog">Write a blog post</a>
 </div>
+
+@foreach (var blog in Model)
+{
+    <div>
+        <label>@blog.Title</label>
+        <p>@blog.Created.ToShortDateString</p>
+        <p>@blog.Body.Substring(0, Math.Min(blog.Body.Length, 100))...</p>
+        <a asp-action="DetailsBlog" asp-route-id="@blog.Id">Lees meer</a>
+    </div>
+}
