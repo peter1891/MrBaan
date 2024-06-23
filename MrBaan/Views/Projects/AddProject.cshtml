@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Add Project";
+}
+
+@model MrBaan.Models.ProjectsModel
+
+<div class="text-center">
+    <h1 class="display-4">Add Project</h1>
+</div>
+
+<form>
+
+    <label>Name</label>
+    <input class="form-control" type="text" asp-for="Name" />
+
+
+    <label>Description</label>
+    <input class="form-control" type="text" asp-for="Description" />
+
+
+    <label>Repository location</label>
+    <input class="form-control" type="text" placeholder="https://example.com/example.git <Required>" asp-for="GitUrl" />
+
+</form>
