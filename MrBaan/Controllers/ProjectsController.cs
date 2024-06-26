@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MrBaan.Database;
+using MrBaan.Core.Repository.Interface;
 using MrBaan.Models;
 using System.Diagnostics;
 
@@ -7,22 +7,30 @@ namespace MrBaan.Controllers
 {
     public class ProjectsController : Controller
     {
-        private readonly DatabaseContext _context;
+        private readonly IProjectRepository _projectRepository;
 
-        public ProjectsController(DatabaseContext context)
+        public ProjectsController(IProjectRepository projectRepository)
         {
-            _context = context;
+            _projectRepository = projectRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int pageIndex = 1)
         {
-            var projects = _context.ProjectModels.ToList();
+            var allProjects = await _projectRepository.GetAllAsync();
+
+            int pageSize = 1;
+            var projects = await _projectRepository.GetProjectsByPage(pageIndex, pageSize);
+
+            ViewBag.HasPreviousPage = pageIndex > 1;
+            ViewBag.HasNextPage = pageIndex < (allProjects.Count() / pageSize);
+            ViewBag.CurrentPage = pageIndex;
+
             return View(projects);
         }
 
-        public IActionResult DetailsProject(int id)
+        public async Task<IActionResult> DetailsProject(int id)
         {
-            var project = _context.ProjectModels.FirstOrDefault(item => item.Id == id);
+            var project = await _projectRepository.GetByIdAsync(id);
             if (project == null)
                 return NotFound();
 
@@ -37,8 +45,7 @@ namespace MrBaan.Controllers
         [HttpPost]
         public IActionResult CreateProject(ProjectModel model)
         {
-            _context.ProjectModels.Add(model);
-            _context.SaveChanges();
+            _projectRepository.AddAsync(model);
 
             return RedirectToAction("Index");
         }

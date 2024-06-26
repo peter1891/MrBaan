@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MrBaan.Database\MrBaan.Database.csproj" />
+    <ProjectReference Include="..\MrBaan.Core.Repository\MrBaan.Core.Repository.csproj" />
     <ProjectReference Include="..\MrBaan.Model\MrBaan.Model.csproj" />
   </ItemGroup>
 

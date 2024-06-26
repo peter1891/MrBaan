@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MrBaan.Core.Repository.Repository
 {
-    internal class BlogRepository : Repository<BlogModel>, IBlogRepository
+    public class BlogRepository : Repository<BlogModel>, IBlogRepository
     {
         public BlogRepository(ApplicationDbContext context)
             : base(context)

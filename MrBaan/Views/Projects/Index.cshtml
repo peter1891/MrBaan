@@ -18,3 +18,14 @@
         <a asp-action="DetailsProject" asp-route-id="@project.Id">Lees meer</a>
     </div>
 }
+
+<div>
+    @if (ViewBag.HasPreviousPage)
+    {
+        <a asp-action="Index" asp-route-pageIndex="@(ViewBag.CurrentPage - 1)">Vorige</a>
+    }
+    @if (ViewBag.HasNextPage)
+    {
+        <a asp-action="Index" asp-route-pageIndex="@(ViewBag.CurrentPage + 1)">Volgende</a>
+    }    
+</div>

@@ -1,11 +1,7 @@
-﻿using MrBaan.Core.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MrBaan.Core.Data;
 using MrBaan.Core.Repository.Interface;
 using MrBaan.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MrBaan.Core.Repository.Repository
 {
@@ -15,6 +11,20 @@ namespace MrBaan.Core.Repository.Repository
             : base(context)
         {
 
+        }
+
+        public async Task<IEnumerable<ProjectModel>> GetProjectsByPage(int pageIndex, int pageSize = 6)
+        {
+            return await ApplicationDbContext.ProjectModels
+                .OrderByDescending(item => item.Created)
+                .Skip((pageIndex - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+        public ApplicationDbContext ApplicationDbContext
+        {
+            get { return _context as ApplicationDbContext; }
         }
     }
 }

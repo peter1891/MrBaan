@@ -1,5 +1,7 @@
-using MrBaan.Database;
 using Microsoft.EntityFrameworkCore;
+using MrBaan.Core.Data;
+using MrBaan.Core.Repository.Interface;
+using MrBaan.Core.Repository.Repository;
 
 namespace MrBaan
 {
@@ -12,9 +14,12 @@ namespace MrBaan
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<DatabaseContext>(options => 
+            builder.Services.AddDbContext<ApplicationDbContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-            database => database.MigrationsAssembly("MrBaan.Database")));
+            database => database.MigrationsAssembly("MrBaan.Core.Data")));
+
+            builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+            builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
             var app = builder.Build();
 

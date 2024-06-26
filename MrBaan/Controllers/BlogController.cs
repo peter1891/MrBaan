@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MrBaan.Database;
+using MrBaan.Core.Repository.Interface;
 using MrBaan.Models;
 using System.Diagnostics;
 
@@ -7,22 +7,22 @@ namespace MrBaan.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly DatabaseContext _context;
+        private readonly IBlogRepository _blogRepository;
 
-        public BlogController(DatabaseContext context)
+        public BlogController(IBlogRepository blogRepository)
         {
-            _context = context;
+            _blogRepository = blogRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var blogs = _context.BlogModels.ToList();
+            var blogs = await _blogRepository.GetAllAsync();
             return View(blogs);
         }
 
-        public IActionResult DetailsBlog(int id)
+        public async Task<ActionResult> DetailsBlog(int id)
         {
-            var blog = _context.BlogModels.FirstOrDefault(item => item.Id == id);
+            var blog = await _blogRepository.GetByIdAsync(id);
             if (blog == null)
                 return NotFound();
 

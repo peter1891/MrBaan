@@ -9,5 +9,6 @@ namespace MrBaan.Core.Repository.Interface
 {
     public interface IProjectRepository : IRepository<ProjectModel>
     {
+        Task<IEnumerable<ProjectModel>> GetProjectsByPage(int pageIndex, int pageSize = 6);
     }
 }
