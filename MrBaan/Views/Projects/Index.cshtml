@@ -4,28 +4,61 @@
     ViewData["Title"] = "Projects";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Projects</h1>
-    <a asp-action="AddProject">Add a new project</a>
+<div class="projects-container">
+    <project-header>
+        <div class="text-center">
+            <h1 class="display-4">Projects</h1>
+            <a asp-action="AddProject">Add a new project</a>
+        </div>
+    </project-header>
+    <project-content class="grid-parrent grid-parrent-collection">
+        @foreach (var project in Model)
+        {
+            <div class="grid-parrent grid-parrent-tile">
+                <div class="grid-child-tile-image">
+                    @if (project.ProjectImages != null && project.ProjectImages.Any())
+                    {
+                        <img src="@project.ProjectImages.First().FilePath" alt="@project.Name" style="width: 100%; height: 100%; object-fit: cover;" />
+                    }
+                </div>
+                <div class="grid-child-tile-name">
+                    <label>@project.Name</label>
+                </div>
+                <div class="grid-child-tile-description">
+                    <p>@project.Description</p>
+                </div>
+                <div class="grid-child-tile-details">
+                    <a asp-action="DetailsProject" asp-route-id="@project.Id">Lees meer</a>
+                </div>
+            </div>
+        }
+    </project-content>
+    <project-footer class="grid-parrent grid-parrent-nav">
+        <div class="grid-child-nav-previous">
+            @if (ViewBag.HasPreviousPage)
+            {
+                <a asp-action="Index" asp-route-pageIndex="@(ViewBag.CurrentPage - 1)">Vorige</a>
+            }
+        </div>
+        <div class="grid-child-nav-index flex-parrent-row flex-parrent-center">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                if (ViewBag.CurrentPage == i)
+                {
+                    <p class="a-margin-side">@i</p>
+                }
+                else
+                {
+                    <a class="a-margin-side" asp-action="Index" asp-route-pageIndex="@i">@i</a>
+                }
+            }
+        </div>
+        <div class="grid-child-nav-next">
+            @if (ViewBag.HasNextPage)
+            {
+                <a asp-action="Index" asp-route-pageIndex="@(ViewBag.CurrentPage + 1)">Volgende</a>
+            }
+        </div>
+    </project-footer>
 </div>
 
-@foreach (var project in Model)
-{
-    <div>
-        <label>@project.Name</label>
-        <p>@project.Created.ToShortDateString()</p>
-        <p>@project.Description</p>
-        <a asp-action="DetailsProject" asp-route-id="@project.Id">Lees meer</a>
-    </div>
-}
-
-<div>
-    @if (ViewBag.HasPreviousPage)
-    {
-        <a asp-action="Index" asp-route-pageIndex="@(ViewBag.CurrentPage - 1)">Vorige</a>
-    }
-    @if (ViewBag.HasNextPage)
-    {
-        <a asp-action="Index" asp-route-pageIndex="@(ViewBag.CurrentPage + 1)">Volgende</a>
-    }    
-</div>

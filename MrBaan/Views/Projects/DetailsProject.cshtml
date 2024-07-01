@@ -4,10 +4,23 @@
     ViewData["Title"] = "Details project";
 }
 
-<div>
-    <label>@Model.Name</label>
-    <p>@Model.Created.ToShortDateString()</p>
-    <p>@Model.Description</p>
-    <a href="@Model.GitUrl">Ga naar repository</a>
-    <a asp-action="Index">Terug naar overzicht</a>
+<div class="grid-parrent grid-parrent-detail">
+    <div class="grid-child-detail-info flex-parrent-column">
+        <div>
+            <h1>@Model.Name</h1>
+        </div>
+        <div>
+            <p>@Model.Description</p>
+        </div>
+        <div class="flex-child-grow">
+            <p>Aangemaakt op: @Model.CreatedOn.ToShortDateString()</p>
+        </div>
+        <div>
+            <a href="@Model.GitUrl">Ga naar repository</a>
+            <a asp-action="Index">Terug naar overzicht</a>
+        </div>
+    </div>
+    <div class="grid-child-detail-image">
+
+    </div>
 </div>

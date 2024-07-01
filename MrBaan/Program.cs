@@ -20,6 +20,7 @@ namespace MrBaan
 
             builder.Services.AddScoped<IBlogRepository, BlogRepository>();
             builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+            builder.Services.AddScoped<IProjectImageRepository, ProjectImageRepository>();
 
             var app = builder.Build();
 

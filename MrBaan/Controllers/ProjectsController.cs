@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MrBaan.Core.Repository.Interface;
+using MrBaan.Model;
 using MrBaan.Models;
 using System.Diagnostics;
 
@@ -18,12 +19,13 @@ namespace MrBaan.Controllers
         {
             var allProjects = await _projectRepository.GetAllAsync();
 
-            int pageSize = 1;
+            int pageSize = 4;
             var projects = await _projectRepository.GetProjectsByPage(pageIndex, pageSize);
 
             ViewBag.HasPreviousPage = pageIndex > 1;
-            ViewBag.HasNextPage = pageIndex < (allProjects.Count() / pageSize);
+            ViewBag.HasNextPage = pageIndex < (int)Math.Ceiling((Double)allProjects.Count() /pageSize);
             ViewBag.CurrentPage = pageIndex;
+            ViewBag.TotalPages = (int)Math.Ceiling((Double)allProjects.Count() / pageSize);
 
             return View(projects);
         }
@@ -43,9 +45,36 @@ namespace MrBaan.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProject(ProjectModel model)
+        public async Task<IActionResult> CreateProject(ProjectModel model, List<IFormFile> formFiles)
         {
-            _projectRepository.AddAsync(model);
+            if (formFiles != null && formFiles.Any())
+            {
+                foreach (var formFile in formFiles)
+                {
+                    if (formFile.Length > 0)
+                    {
+                        var images = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img");
+                        if (!Directory.Exists(images))
+                            Directory.CreateDirectory(images);
+
+                        var filePath = Path.Combine(images, formFile.FileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                            await formFile.CopyToAsync(stream);
+
+                        ProjectImageModel projectImageModel = new ProjectImageModel()
+                        {
+                            FileName = formFile.FileName,
+                            FilePath = $"/img/{formFile.FileName}",
+                            ProjectModel = model
+                        };
+
+                        model.ProjectImages.Add(projectImageModel);
+                    }
+                }
+            }
+
+            await _projectRepository.AddAsync(model);
 
             return RedirectToAction("Index");
         }

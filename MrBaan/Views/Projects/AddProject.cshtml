@@ -9,7 +9,7 @@
     <h1 class="display-4">Add Project</h1>
 </div>
 
-<form asp-action="CreateProject" method="post">
+<form asp-action="CreateProject" method="post" enctype="multipart/form-data">
 
     <label>Name</label>
     <input class="form-control" type="text" asp-for="Name" />
@@ -21,6 +21,9 @@
 
     <label>Repository location</label>
     <input class="form-control" type="text" placeholder="https://example.com/example.git <Required>" asp-for="GitUrl" />
+
+    <label>Image</label>
+    <input class="form-control" type="file" name="formFiles" accept="image/*" multiple />
 
     <input type="submit" />
 

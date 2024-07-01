@@ -1,4 +1,6 @@
-﻿namespace MrBaan.Models
+﻿using MrBaan.Model;
+
+namespace MrBaan.Models
 {
     public class ProjectModel
     {
@@ -9,6 +11,8 @@
 
         public string GitUrl { get; set; }
 
-        public DateTime Created {  get; set; } = DateTime.Now;
+        public DateTime CreatedOn {  get; set; } = DateTime.Now;
+
+        public ICollection<ProjectImageModel> ProjectImages { get; set; } = new List<ProjectImageModel>();
     }
 }
