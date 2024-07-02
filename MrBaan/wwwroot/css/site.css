@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .projects-container {
@@ -148,6 +148,50 @@ project-footer {
     grid-area: grid-child-tile-details;
     position: relative;
     z-index: 1;
+}
+
+.slider-wrapper {
+    position: relative;
+    margin: 0 auto;
+}
+
+.slider-image {
+    display: flex;
+    aspect-ratio: 4/3;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    /*border-radius: 0.5rem;*/
+    scrollbar-width: none;
+}
+
+.slider-image img {
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    object-fit: cover;
+}
+
+.slider-nav {
+    display: flex;
+    column-gap: 1rem;
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.slider-nav a {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.75;
+    transition: opacity ease 250ms;
+}
+
+.slider-nav a:hover {
+    opacity: 1;
 }
 
 .a-margin-side {

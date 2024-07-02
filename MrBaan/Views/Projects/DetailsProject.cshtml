@@ -21,6 +21,19 @@
         </div>
     </div>
     <div class="grid-child-detail-image">
-
+        <div class="slider-wrapper">
+            <div class="slider-image">
+                @foreach (var projectImage in Model.ProjectImages)
+                {
+                    <img id="@projectImage.FileName" src="@projectImage.FilePath" alt="@Model.Name" style="width: 100%; height: 100%; object-fit: cover;" />
+                }
+            </div>
+            <div class="slider-nav">
+                @foreach (var projectImage in Model.ProjectImages)
+                {
+                    <a href="#@projectImage.FileName"></a>
+                }
+            </div>
+        </div>
     </div>
 </div>
